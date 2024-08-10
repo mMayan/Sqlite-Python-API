@@ -40,7 +40,7 @@ quando o usuário for autenticado a API vai retornar um token de acesso que fica
 
 ## Como autenticar o usuário:
 
-Logo após você copiar seu token de acesso, vamos seguir com os seguintes passos utilizando o Postman para deixar o usário autenticado.
+Logo após você copiar seu token de acesso, vamos seguir com os seguintes passos utilizando o Postman para deixar o usuário autenticado.
 
 ![](images/header1.png)
 
