@@ -26,9 +26,13 @@ def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     
-    if username and password not in users.get_one_user(username, password):
+    try:
+        if username and password not in users.get_one_user(username, password):
+            pass
+    except TypeError:
         return jsonify({"msg": "Usuário ou senha incorretos"}), 401
     
+
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token)
 
@@ -36,6 +40,11 @@ def login():
 @jwt_required()
 def delete_user(id):
     final = users.delete_user(id)
+    return jsonify(final)
+
+@app.route("/userget", methods=['GET'])
+def get_user():
+    final = users.get_user()
     return jsonify(final)
 
 
