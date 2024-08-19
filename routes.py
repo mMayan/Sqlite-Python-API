@@ -42,11 +42,22 @@ def delete_user(id):
     final = users.delete_user(id)
     return jsonify(final)
 
+
 @app.route("/userget", methods=['GET'])
+@jwt_required()
 def get_user():
-    final = users.get_user()
+    final = users.get_users()
     return jsonify(final)
 
+
+@app.route("/userup", methods=['PUT'])
+@jwt_required()
+def user_update():
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+    
+    final = users.update_user(password, username)
+    return jsonify(final)
 
 # ----------- CRUD database ----------- #
 

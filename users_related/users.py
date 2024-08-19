@@ -46,11 +46,23 @@ def delete_user(id):
     return True
 
 
-# def get_user():
-#     db = crud_db.conecta_database()
-#     cursor = db.cursor()
+def get_users():
+    db = crud_db.conecta_database()
+    cursor = db.cursor()
 
-#     cursor.execute(
-#         """SELECT * FROM users;""")
+    cursor.execute(
+        """SELECT * FROM users;""")
     
-#     return cursor.fetchall()
+    return cursor.fetchall()
+
+
+def update_user(senha, nome):
+    db = crud_db.conecta_database()
+    cursor = db.cursor()
+
+    cursor.execute(
+        """UPDATE users SET password = ? WHERE username = ?;
+    """, (senha, nome))
+
+    db.commit()
+    return True
