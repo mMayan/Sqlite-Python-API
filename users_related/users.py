@@ -66,3 +66,13 @@ def update_user(senha, nome):
 
     db.commit()
     return True
+
+def get_user_by_name_only(nome):
+    db = crud_db.conecta_database()
+    cursor = db.cursor()
+
+    cursor.execute(
+        """SELECT username FROM users WHERE username = ?
+    """, (nome,))
+
+    return cursor.fetchone()

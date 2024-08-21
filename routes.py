@@ -56,8 +56,16 @@ def user_update():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     
+    try:
+        if username not in users.get_user_by_name_only(username):
+            pass
+    except TypeError:
+        return jsonify({"msg": "usuário não cadastrado"}), 401
+
     final = users.update_user(password, username)
     return jsonify(final)
+    
+
 
 # ----------- CRUD database ----------- #
 
