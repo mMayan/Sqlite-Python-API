@@ -11,7 +11,7 @@ with dpg.viewport_menu_bar():
 
     with dpg.menu(label='visualização'):
         dpg.add_menu_item(label='produtos', callback=cbk.get_products)
-        # dpg.add_menu_item(label='usuários', callback=?)
+        dpg.add_menu_item(label='usuários', callback=cbk.get_users)
 
     with dpg.menu(label='inserção'):
         dpg.add_menu_item(label="produtos", callback=cbk.add_dpg_product)
