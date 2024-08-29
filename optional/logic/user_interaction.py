@@ -64,7 +64,7 @@ def delete_user():
 def get_all_users():
     url_get_users = 'http://192.168.1.26:8000/userget'
     
-    confirm_access = str(input("> "))
+    confirm_access = dpg.get_value('token_get_users')
 
     auth_header = {
         "Authorization": f'Bearer {confirm_access}'
@@ -73,12 +73,16 @@ def get_all_users():
     response = requests.get(url_get_users, headers=auth_header)
 
     if response.status_code == 200:
-        for i in response.json():
-            print(i)
+        dpg.set_value('output_get_users', "")
+        
+        for item in response.json():
+            dpg.set_value('output_get_users', dpg.get_value('output_get_users') + f'{item}\n')
 
     else:
-        print('status code: ', response.status_code)
-        print('response body ', response.text)
+        # print('status code: ', response.status_code)
+        # print('response body ', response.text)
+        dpg.set_value('status_get_users', response.status_code)
+        dpg.set_value('text_get_users', response.text)
 
 
 

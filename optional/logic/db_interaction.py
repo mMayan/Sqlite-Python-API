@@ -14,12 +14,16 @@ def print_products():
 
     response = requests.get(url_get_products, headers=auth_header)
     if response.status_code == 200:
-        for i in response.json():
-            dpg.set_value('output_get_products', i)
-    else:
-        print('status code: ', response.status_code)
-        print('responde body: ', response.text)
+        dpg.set_value('output_get_products', "")
+        
+        for item in response.json():
+            dpg.set_value('output_get_products', dpg.get_value('output_get_products') + f'{item}\n')
 
+    else:
+        # print('status code: ', response.status_code)
+        # print('responde body: ', response.text)
+        dpg.set_value('feedback_status_get_p', response.status_code)
+        dpg.set_value('feedback_text_get_p', response.text)
 # print_products()
 
 
