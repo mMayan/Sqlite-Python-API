@@ -135,3 +135,7 @@ def get_users():
 
     else:
         dpg.show_item('window_GET_output_users')
+
+
+def update_products():
+    pass
