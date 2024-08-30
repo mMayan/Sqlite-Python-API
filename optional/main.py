@@ -1,8 +1,8 @@
 import dearpygui.dearpygui as dpg
 import logic.all_dpg.dpg_callbacks as cbk
-
+import logic.all_dpg.hide_n_show as h_n_s
 dpg.create_context()
-dpg.create_viewport(title='API interaction', width=900, height=500)
+dpg.create_viewport(title='API interaction', width=616, height=500)
 
 with dpg.viewport_menu_bar():
     
@@ -22,7 +22,8 @@ with dpg.viewport_menu_bar():
     with dpg.menu(label='deletar'):
         dpg.add_menu_item(label='produtos e usuários', callback=cbk.delete_products_users)
 
-
+    with dpg.menu(label='limpar janelas'):
+        dpg.add_menu_item(label='limpar', callback=h_n_s.hide_all_windows)
 dpg.setup_dearpygui()
 dpg.show_viewport()
 dpg.start_dearpygui()
