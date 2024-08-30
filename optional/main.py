@@ -16,7 +16,8 @@ with dpg.viewport_menu_bar():
     with dpg.menu(label='inserção'):
         dpg.add_menu_item(label="produtos", callback=cbk.add_dpg_product)
 
-
+    with dpg.menu(label='atualização'):
+        dpg.add_menu_item(label='produtos e usuários', callback=cbk.update_products_users)
 
 
 dpg.setup_dearpygui()

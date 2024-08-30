@@ -61,7 +61,7 @@ def delete_user():
         print('responde body: ', response.text)
 
 
-def get_all_users():
+def get_all_users(): # check dpg!
     url_get_users = 'http://192.168.1.26:8000/userget'
     
     confirm_access = dpg.get_value('token_get_users')
@@ -87,13 +87,13 @@ def get_all_users():
 
 
 
-def up_to_date_users():
+def up_to_date_users(): #check dpg!
     url_update_users = 'http://192.168.1.26:8000/userup'
     
-    username = str(input("nome do usuário: "))
-    password = str(input("senha: "))
+    username = dpg.get_value('user_name_update')
+    password = dpg.get_value('user_password_update')
 
-    confirm_access = str(input("> "))
+    confirm_access = dpg.get_value('auth_user_update')
 
     auth_header = {
         'Authorization': f'Bearer {confirm_access}'
@@ -107,9 +107,12 @@ def up_to_date_users():
     response = requests.put(url_update_users, json=payload, headers=auth_header)
 
     if response.status_code == 200:
-        print("atualização concluída!")
+        # print("atualização concluída!")
+        dpg.set_value('feedback_update_user', 'atualização conlcuiída!')
     
     else:
-        print('status code: ', response.status_code)
-        print('responde body: ', response.text)
+        # print('status code: ', response.status_code)
+        # print('responde body: ', response.text)
+        dpg.set_value('status_code_u_up', response.status_code)
+        dpg.set_value('text_u_up', response.text)
 

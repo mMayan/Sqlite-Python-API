@@ -62,7 +62,7 @@ def add_dpg_product(): # database
 
 
             dpg.add_spacer(height=5)
-            dpg.add_text("quantiade de estoque:", indent=38)
+            dpg.add_text("quantidade de estoque:", indent=38)
             dpg.add_input_int(tag='valueI_product_add', indent=38)
 
 
@@ -137,5 +137,63 @@ def get_users():
         dpg.show_item('window_GET_output_users')
 
 
-def update_products():
-    pass
+def update_products_users():
+    if not dpg.does_item_exist('window_update_product'):
+        with dpg.window(label='produtos', width=300, height=500, tag='window_update_product'):
+            dpg.add_text("insira os dados do produto para atualizar")
+
+            dpg.add_spacer(height=6)
+            dpg.add_input_text(hint='nome do produto', tag='name_product_update', indent=38)
+
+            dpg.add_spacer(height=5)
+            dpg.add_text('valor do produto:', indent=38)
+            dpg.add_input_double(tag='valueF_product_update', indent=38)
+
+            dpg.add_spacer(height=5)
+            dpg.add_text("quantidade de estoque:", indent=38)
+            dpg.add_input_int(tag='valueI_product_update', indent=38)
+
+            dpg.add_spacer(height=8)
+            dpg.add_input_text(hint='token de autorização', tag='auth_product_update', indent=38)
+
+            dpg.add_spacer(height=7)
+            dpg.add_button(label='enviar', indent=100, callback=db_inte.up_to_date_products)
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='feedback_p_update', indent=48)
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='feedback_status_code_up')
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='feedback_text_up')
+    else:
+        dpg.show_item('window_update_product')
+    
+    if not dpg.does_item_exist('window_update_users'):
+        with dpg.window(label='usuários', width=300, height=500, pos=[300], tag='window_update_users'):
+            dpg.add_text("insira o usuário para alterar a senha", indent=18)
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_text(hint='usuário', indent=38, tag='user_name_update')
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_text(hint='senha', password=True, indent=38, tag='user_password_update')
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_text(hint='token de autorização', indent=38, tag='auth_user_update')
+
+            dpg.add_spacer(height=7)
+            dpg.add_button(label='enviar', indent=100, callback=user_inte.up_to_date_users)
+            
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='feedback_update_user', indent=48)
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='status_code_u_up')
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='text_u_up')
+
+    else:
+        dpg.show_item('window_update_users')

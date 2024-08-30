@@ -3,7 +3,7 @@ import requests
 # http://192.168.1.26:8000
 # https://requests.readthedocs.io/en/latest/
 
-def print_products():
+def print_products(): #check dpg!
     url_get_products = 'http://192.168.1.26:8000/produtos'
 
     confirm_access = dpg.get_value('token_get_products')
@@ -59,14 +59,14 @@ def add_product(): # check dpg!
 # add_product()
 
 
-def up_to_date_products():
+def up_to_date_products(): #check dpg!
     url_update_product = 'http://192.168.1.26:8000/produto'
 
-    produto = str(input("produto existente: "))
-    valor = float(input("novo valor do produto: "))
-    estoque = int(input("nova quantidade de estoque: "))
+    produto = dpg.get_value('name_product_update')
+    valor = dpg.get_value('valueF_product_update')
+    estoque = dpg.get_value('valueI_product_update')
 
-    confirm_access = str(input("> "))
+    confirm_access = dpg.get_value('auth_product_update')
 
     auth_header = {
         'Authorization': f'Bearer {confirm_access}'
@@ -80,11 +80,14 @@ def up_to_date_products():
     response = requests.put(url_update_product, json=payload, headers=auth_header)
     
     if response.status_code == 200:
-        print("atualização concluída!")
+        # print("atualização concluída!")
+        dpg.set_value('feedback_p_update', 'atualização concluída!')
     
     else:
-        print('status code: ', response.status_code)
-        print('responde body: ', response.text)
+        # print('status code: ', response.status_code)
+        # print('responde body: ', response.text)
+        dpg.set_value('feedback_status_code_up', response.status_code)
+        dpg.set_value('feedback_text_up', response.text)
 
 # up_to_date_products()
 
