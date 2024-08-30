@@ -136,7 +136,6 @@ def get_users():
     else:
         dpg.show_item('window_GET_output_users')
 
-
 def update_products_users():
     if not dpg.does_item_exist('window_update_product'):
         with dpg.window(label='produtos', width=300, height=500, tag='window_update_product'):
@@ -197,3 +196,51 @@ def update_products_users():
 
     else:
         dpg.show_item('window_update_users')
+
+
+def delete_products_users():
+    if not dpg.does_item_exist('window_delete_product'):
+        with dpg.window(label='produtos', width=300, height=500, tag='window_delete_product'):
+            dpg.add_text('digite o id do produto para excluir')
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_int(tag='int_delete_p', indent=38)
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_text(hint='token de verificação', indent=38, tag='auth_delete_p')
+
+            dpg.add_spacer(height=7)
+            dpg.add_button(label='enviar', indent=100, callback=db_inte.get_rid_of_product)
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='feedback_delete_p', indent=68)
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='delete_status_code_p')
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='delete_text_p')
+
+    else:
+        dpg.show_item('window_delete_product')
+
+    if not dpg.does_item_exist('window_delete_user'):
+        with dpg.window(label='usuários', width=300, height=500, pos=[300], tag='window_delete_user'):
+            dpg.add_text('digite o id do usuário para excluir')
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_int(tag='int_delete_u', indent=38)
+
+            dpg.add_spacer(height=7)
+            dpg.add_input_text(hint='token de verificação', indent=38, tag='auth_delete_u')
+
+            dpg.add_spacer(height=7)
+            dpg.add_button(label='enviar', callback=user_inte.delete_user, indent=100)
+            
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='status_code_user')
+
+            dpg.add_spacer(height=7)
+            dpg.add_text("", tag='text_user')
+    else:
+        dpg.show_item('window_delete_user')

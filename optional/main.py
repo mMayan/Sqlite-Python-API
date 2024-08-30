@@ -19,6 +19,9 @@ with dpg.viewport_menu_bar():
     with dpg.menu(label='atualização'):
         dpg.add_menu_item(label='produtos e usuários', callback=cbk.update_products_users)
 
+    with dpg.menu(label='deletar'):
+        dpg.add_menu_item(label='produtos e usuários', callback=cbk.delete_products_users)
+
 
 dpg.setup_dearpygui()
 dpg.show_viewport()

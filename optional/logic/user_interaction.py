@@ -41,11 +41,11 @@ def login_user(): # check dpg!
 
 
 
-def delete_user():
-    ask = int(input("digite o id do usuário a ser deletado: "))
+def delete_user(): # check dpg!
+    ask = dpg.get_value('int_delete_u')
     url_delete = f'http://192.168.1.26:8000/login/{ask}'
 
-    confirm_access = str(input("> "))
+    confirm_access = dpg.get_value('auth_delete_u')
 
     auth_header = {
         "Authorization": f'Bearer {confirm_access}'
@@ -54,12 +54,15 @@ def delete_user():
     response = requests.delete(url_delete, headers=auth_header)
 
     if response.status_code == 200:
-        print('o delete foi feito com sucesso!')
+        # print('o delete foi feito com sucesso!')
+        dpg.set_value('feedback_delete_u', 'delete concluído!')
     else:
-        print('falhou ao deletar o usuário')
-        print('status code: ', response.status_code)
-        print('responde body: ', response.text)
-
+        # print('falhou ao deletar o usuário')
+        # print('status code: ', response.status_code)
+        # print('responde body: ', response.text)
+        # dpg.set_value('unable_find_user','falhou ao deletar o usuário')
+        dpg.set_value('status_code_user', response.status_code)
+        dpg.set_value('text_user', response.text)
 
 def get_all_users(): # check dpg!
     url_get_users = 'http://192.168.1.26:8000/userget'

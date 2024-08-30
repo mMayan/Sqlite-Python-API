@@ -59,7 +59,7 @@ def add_product(): # check dpg!
 # add_product()
 
 
-def up_to_date_products(): #check dpg!
+def up_to_date_products(): # check dpg!
     url_update_product = 'http://192.168.1.26:8000/produto'
 
     produto = dpg.get_value('name_product_update')
@@ -92,11 +92,11 @@ def up_to_date_products(): #check dpg!
 # up_to_date_products()
 
 
-def get_rid_of_product():
-    ask = int(input("digite o id do produto a ser deletado: "))
+def get_rid_of_product(): # check dpg!
+    ask = dpg.get_value('int_delete_p')
     url_delete_product = f'http://192.168.1.26:8000/produto/{ask}'
 
-    confirm_access = str(input("> "))
+    confirm_access = dpg.get_value('auth_delete_p')
 
     auth_header = {
         'Authorization': f'Bearer {confirm_access}'
@@ -105,10 +105,12 @@ def get_rid_of_product():
     response = requests.delete(url_delete_product, headers=auth_header)
 
     if response.status_code == 200:
-        print("atualização concluída!")
+        # print("atualização concluída!")
+        dpg.set_value('feedback_delete_p', 'delete concluído!')
     
     else:
-        print('status code: ', response.status_code)
-        print('responde body: ', response.text)
-
+        # print('status code: ', response.status_code)
+        # print('responde body: ', response.text)
+        dpg.set_value('delete_status_code_p', response.status_code)
+        dpg.set_value('delete_text_p', response.text)
 # get_rid_of_product()
