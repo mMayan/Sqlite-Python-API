@@ -1,7 +1,6 @@
 import dearpygui.dearpygui as dpg
 import requests
-# http://192.168.1.26:8000
-# https://requests.readthedocs.io/en/latest/
+
 
 def print_products(): #check dpg!
     url_get_products = 'http://192.168.1.26:8000/produtos'

@@ -1,7 +1,6 @@
 import dearpygui.dearpygui as dpg
 import requests
-# http://192.168.1.26:8000
-# https://requests.readthedocs.io/en/latest/
+
 
 def register_user(): # check dpg!
     url_register = 'http://192.168.1.26:8000/register'
